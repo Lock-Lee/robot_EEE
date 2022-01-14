@@ -1,17 +1,172 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Robot Car </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div style="text-align: center">
+    <ion-grid>
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-item>
+              <ion-icon name="thunderstorm-outline" slot="start"></ion-icon>
+              <ion-label>Humidity</ion-label>
+              &nbsp;&nbsp;&nbsp;
+              <ion-badge color="primary">{{BME280}}</ion-badge>
+              &nbsp;&nbsp;&nbsp;
+              <ion-label>%</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="battery-full-outline" slot="start"></ion-icon>
+              <ion-label>Ampmeter</ion-label>
+              &nbsp;&nbsp;&nbsp;
+              <ion-badge color="primary">{{Ampmeter}}</ion-badge>
+              &nbsp;&nbsp;&nbsp;
+              <ion-label>Amp</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="sparkles-outline" slot="start"></ion-icon>
+              <ion-label>Wild Speed</ion-label>
+              &nbsp;&nbsp;&nbsp;
+              <ion-badge color="primary">{{Wild_Speed}}</ion-badge>
+              &nbsp;&nbsp;&nbsp;
+              <ion-label>m/s</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="color-fill-outline" slot="start"></ion-icon>
+              <ion-label>Ultrasonic</ion-label>
+              &nbsp;&nbsp;&nbsp;
+              <ion-badge color="primary">{{Ultrasonic}}</ion-badge>
+              &nbsp;&nbsp;&nbsp;
+              <ion-label>%</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>pump</ion-label>
+              <ion-toggle
+                slot="end"
+                color="primary"
+                (ionChange)="onClickEvap($event)"
+              ></ion-toggle>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+        <ion-col> </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card
+            style="
+              max-width: 600px;
+              max-height: 500px;
+              width: auto;
+              height: auto;
+            "
+          >
+            <img
+              src="{{IP}}video_feed"
+              style="
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                height: max-content;
+                width: max-content;
+              "
+          /></ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col>
+          <ion-card
+            style="
+              width: auto;
+              height: auto;
+              text-align: center;
+              min-width: 80vw;
+            "
+          >
+            <ion-card-content>
+              <ion-item>
+                <ion-button color="primary" *ngIf="sw1" (click)="conIP()"
+                  >ตั้งค่า</ion-button
+                >
+                <ion-input
+                  value="{{IP}}"
+                  #set
+                  *ngIf="sw"
+                  (change)="readIP(set.value)"
+                ></ion-input>
+                <ion-button color="primary" *ngIf="sw" (click)="setIP('ww')"
+                  >ตกลง</ion-button
+                >
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col> </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-grid>
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col
+          ><ion-button
+            color="primary"
+            (touchstart)="start(2)"
+            (touchend)="end('7')"
+            >เดินหน้า</ion-button
+          >
+        </ion-col>
+        <ion-col> </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col
+          ><ion-button
+            style="float: right"
+            color="primary"
+            (touchstart)="start('3')"
+            (touchend)="end('7')"
+            >เลี้ยวซ้าย</ion-button
+          >
+        </ion-col>
+        <ion-col
+          style="
+            margin-right: 0px;
+            margin-left: 0px;
+            width: 100px;
+            max-width: 100px;
+          "
+        >
+        </ion-col>
+        <ion-col
+          ><ion-button
+            style="float: left"
+            color="primary"
+            (touchstart)="start('1')"
+            (touchend)="end('7')"
+            >เลี้ยวขวา</ion-button
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col> </ion-col>
+        <ion-col>
+          <ion-button
+            color="primary"
+            (touchstart)="start('4')"
+            (touchend)="end('7')"
+            >ถอยหลัง</ion-button
+          ></ion-col
+        >
+        <ion-col> </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
